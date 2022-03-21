@@ -16,45 +16,55 @@ public class Target : MonoBehaviour
 
     public int pointValue;
     public ParticleSystem explosionParticle;
-   
-    
-        
-    
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
-    { 
-        
+    {
+
         targetRb = GetComponent<Rigidbody>();// accessing the GameObjects Rigidbody
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetRb.AddForce(RandomForce(), ForceMode.Impulse); // applying Force randomly to the object
         targetRb.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse); // applying that force on all three axis
 
         transform.position = RandomSpawnPos(); //spawn in random position
-
-}
+    }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     /// <summary>
     /// These are all the methods created to Destroy the objects apply the diffrent types of force and positions
     /// </summary>
-    private void OnMouseDown()
+    private void OnMouseDown() //function
     {
-        Destroy(gameObject);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-        gameManager.UpdateScore(pointValue);
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
-        
+
+        if (gameManager.isGameActive)
+
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            gameManager.UpdateScore(pointValue);
+        }
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (!gameObject.CompareTag("Bad"))
+
+        {
+            gameManager.GameOver();
+
+        }
+    }
+
+
     Vector3 RandomForce()
     {
         return Vector3.up * Random.Range(minSpeed, maxSpeed);
