@@ -52,7 +52,10 @@ public class Target : MonoBehaviour
             gameManager.UpdateScore(pointValue);
         }
     }
-
+    /// <summary>
+    /// looking for a good game object to hit the sensor , when it does it will stop the game
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
 
@@ -63,7 +66,7 @@ public class Target : MonoBehaviour
 
         }
     }
-
+    // creating the method that will oput the random force and torque and range for all the game objects
 
     Vector3 RandomForce()
     {
