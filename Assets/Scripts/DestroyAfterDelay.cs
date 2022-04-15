@@ -6,7 +6,7 @@ public class DestroyAfterDelay : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
-    {
+    { // destroying game object once out of view
         Destroy(gameObject, 2);
     }
 
